@@ -2,12 +2,14 @@ import os
 from sqlalchemy import Column, String, Integer, Date, create_engine
 from flask_sqlalchemy import SQLAlchemy
 
+
 # Database setup
 database_path = os.environ.get('DATABASE_URL')
 if database_path.startswith("postgres://"):
     database_path = database_path.replace("postgres://", "postgresql://", 1)
 
 db = SQLAlchemy()
+
 
 def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path

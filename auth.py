@@ -1,3 +1,4 @@
+import os
 import json
 from flask import request, _request_ctx_stack
 from functools import wraps
@@ -104,16 +105,20 @@ def verify_decode_jwt(token):
 
 # This decorator is used to secure endpoints by verifying the JWT token
 def requires_auth(f):
-    @wraps(f)
-    def decorated(*args, **kwargs):
-        token = get_token_auth_header()
-        try:
-            payload = verify_decode_jwt(token)
-        except AuthError as error:
-            raise AuthError(error.error, error.status_code)
-        return f(payload, *args, **kwargs)
-
-    return decorated
+    if os.getenv('FLASK_ENV') == 'cli':
+        # Mock decorator that does nothing during CLI commands
+        return f
+    else:
+        # Actual requires_auth logic
+        def decorated_function(*args, **kwargs):
+            token = get_token_auth_header()
+            try:
+                payload = verify_decode_jwt(token)
+                check_permissions('your_permission', payload)
+            except AuthError as error:
+                raise AuthError(error.error, error.status_code)
+            return f(payload, *args, **kwargs)
+        return decorated_function
 
 # This function checks if the user has the necessary permissions
 def check_permissions(permission, payload):

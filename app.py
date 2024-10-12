@@ -3,14 +3,19 @@ from flask import Flask, request, jsonify, abort
 from flask_sqlalchemy import SQLAlchemy
 from models import setup_db, Movie, Actor
 from flask_cors import CORS
+from flask_migrate import Migrate
+from models import db
 
 # Auth0 and RBAC imports
 from auth import requires_auth
+
+migrate = Migrate()
 
 def create_app(test_config=None):
     app = Flask(__name__)
     setup_db(app)
     CORS(app)
+    migrate.init_app(app, db)
 
     # GET /movies
     @app.route('/movies', methods=['GET'])
