@@ -63,14 +63,23 @@ def create_app(test_config=None):
             abort(422)
 
         try:
+            # Create a new movie object
             movie = Movie(title=title, release_date=release_date)
-            movie.insert()
+            
+            # Add and commit the movie to the database
+            db.session.add(movie)
+            db.session.commit()
+            
             return jsonify({
                 'success': True,
                 'movie': movie.format()
             }), 201
-        except:
+        except Exception as e:
+            print(f"Error creating movie: {e}")
+            db.session.rollback()  # Rollback in case of any errors
             abort(500)
+        finally:
+            db.session.close()  # Ensure the session is closed
 
     # POST /actors
     @app.route('/actors', methods=['POST'])
@@ -87,13 +96,18 @@ def create_app(test_config=None):
 
         try:
             actor = Actor(name=name, age=age, gender=gender)
-            actor.insert()
+            db.session.add(actor)
+            db.session.commit()
             return jsonify({
                 'success': True,
                 'actor': actor.format()
             }), 201
-        except:
+        except Exception as e:
+            print(f"Error creating actor: {e}")
+            db.session.rollback()
             abort(500)
+        finally:
+            db.session.close()
 
     # DELETE /movies/<int:movie_id>
     @app.route('/movies/<int:movie_id>', methods=['DELETE'])
@@ -104,13 +118,18 @@ def create_app(test_config=None):
             abort(404)
 
         try:
-            movie.delete()
+            db.session.delete(movie)
+            db.session.commit()
             return jsonify({
                 'success': True,
                 'deleted': movie_id
             }), 200
-        except:
+        except Exception as e:
+            print(f"Error deleting movie: {e}")
+            db.session.rollback()
             abort(500)
+        finally:
+            db.session.close()
 
     # DELETE /actors/<int:actor_id>
     @app.route('/actors/<int:actor_id>', methods=['DELETE'])
@@ -121,13 +140,18 @@ def create_app(test_config=None):
             abort(404)
 
         try:
-            actor.delete()
+            db.session.delete(actor)
+            db.session.commit()
             return jsonify({
                 'success': True,
                 'deleted': actor_id
             }), 200
-        except:
+        except Exception as e:
+            print(f"Error deleting actor: {e}")
+            db.session.rollback()
             abort(500)
+        finally:
+            db.session.close()
 
     # PATCH /movies/<int:movie_id>
     @app.route('/movies/<int:movie_id>', methods=['PATCH'])
@@ -148,13 +172,17 @@ def create_app(test_config=None):
             movie.release_date = release_date
 
         try:
-            movie.update()
+            db.session.commit()
             return jsonify({
                 'success': True,
                 'movie': movie.format()
             }), 200
-        except:
+        except Exception as e:
+            print(f"Error updating movie: {e}")
+            db.session.rollback()
             abort(500)
+        finally:
+            db.session.close()
 
     # PATCH /actors/<int:actor_id>
     @app.route('/actors/<int:actor_id>', methods=['PATCH'])
@@ -178,13 +206,17 @@ def create_app(test_config=None):
             actor.gender = gender
 
         try:
-            actor.update()
+            db.session.commit()
             return jsonify({
                 'success': True,
                 'actor': actor.format()
             }), 200
-        except:
+        except Exception as e:
+            print(f"Error updating actor: {e}")
+            db.session.rollback()
             abort(500)
+        finally:
+            db.session.close()
 
     return app
 

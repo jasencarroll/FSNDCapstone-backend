@@ -136,8 +136,16 @@ def requires_auth(permission=''):
         @wraps(f)
         def wrapper(*args, **kwargs):
             token = get_token_auth_header()
+            print(f"Token: {token}")  # Log the token for debugging
+
             payload = verify_decode_jwt(token)
+            print(f"Decoded JWT payload: {payload}")  # Log the decoded payload
+
             check_permissions(permission, payload)
+
+            # Log the function arguments to see if payload or kwargs are affected
+            print(f"Function arguments before calling: args={args}, kwargs={kwargs}")
             return f(payload, *args, **kwargs)  # Pass payload to the decorated function
         return wrapper
     return decorator
+
