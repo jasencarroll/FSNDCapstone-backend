@@ -10,7 +10,6 @@ if database_path.startswith("postgres://"):
 
 db = SQLAlchemy()
 
-
 def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
