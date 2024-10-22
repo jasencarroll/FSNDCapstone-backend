@@ -1,7 +1,10 @@
 import os
 from sqlalchemy import Column, String, Integer, Date, create_engine
 from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
 
+# Load environment variables from a .env file
+load_dotenv()
 
 # Database setup
 database_path = os.environ.get('DATABASE_URL')
