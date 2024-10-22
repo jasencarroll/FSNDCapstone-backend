@@ -15,7 +15,7 @@ load_dotenv()
 
 # Configuration variables
 AUTH0_DOMAIN = os.getenv('AUTH0_DOMAIN')
-API_AUDIENCE = os.getenv('API_AUDIENCE')
+AUDIENCE = os.getenv('AUDIENCE')
 ALGORITHMS = ['RS256']
 
 ##############################################################################
@@ -94,7 +94,7 @@ def verify_decode_jwt(token):
                 token,
                 pem_key,
                 algorithms=ALGORITHMS,
-                audience=API_AUDIENCE,
+                audience=AUDIENCE,
                 issuer=f'https://{AUTH0_DOMAIN}/'
             )
 

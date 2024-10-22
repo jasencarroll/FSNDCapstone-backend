@@ -20,6 +20,13 @@ def create_app(test_config=None):
     setup_db(app)
     CORS(app)
     migrate.init_app(app, db)
+    
+    # GET /
+    @app.route('/', methods=['GET'])
+    def index():
+        return jsonify({
+            'success': True,
+        }), 200
 
     # GET /movies
     @app.route('/movies', methods=['GET'])
@@ -184,4 +191,4 @@ def create_app(test_config=None):
 app = create_app()
 
 if __name__ == '__main__':
-    app.run(host='localhost', port=5001)
+    app.run(host='localhost', port=5000)

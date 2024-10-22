@@ -26,4 +26,5 @@ rsa==4.9
 setuptools==75.1.0
 six==1.16.0
 SQLAlchemy==1.4.18
-Werkzeug==3.0.4
+Werkzeug==2.0.3
+
