@@ -1,16 +1,24 @@
-<html>
-  <head>
+<!DOCTYPE html>
+  <html lang="en">
     <meta charset="utf-8" />
-    <title>Auth0 Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask with Bootstrap</title>
+
+    <!-- Include Bootstrap CSS from CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
+    <div class = "container">
     {% if session %}
-        <h1>Welcome {{session.userinfo.name}}!</h1>
+        <h1 class="text-center">Welcome {{session.userinfo.name}}!</h1>
         <p><a href="/logout">Logout</a></p>
         <div><pre>{{pretty}}</pre></div>
     {% else %}
-        <h1>Welcome Guest</h1>
-        <p><a href="/login">Login</a></p>
+        <h1 class="text-center">Welcome Guest</h1>
+        <p class="text-center">
+            <button type="button" class="btn btn-warning"><a href="/login">Login</a></button>
+        </p>
     {% endif %}
+    </div>
   </body>
 </html>
