@@ -21,6 +21,20 @@ def create_app(test_config=None):
     CORS(app)
     migrate.init_app(app, db)
     
+    # Ensure that AuthError inherits from Exception
+    class AuthError(Exception):
+        """Custom Exception for Authentication Errors."""
+        def __init__(self, error, status_code):
+            self.error = error
+            self.status_code = status_code
+
+    @app.errorhandler(AuthError)
+    def handle_auth_error(ex):
+        """Error handler for authentication errors."""
+        response = jsonify(ex.error)
+        response.status_code = ex.status_code
+        return response
+    
     # GET /
     @app.route('/', methods=['GET'])
     def index():
