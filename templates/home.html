@@ -2,7 +2,7 @@
   <html lang="en">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask with Bootstrap</title>
+    <title>Casting Agency</title>
 
     <!-- Include Bootstrap CSS from CDN -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -11,7 +11,7 @@
     <div class = "container">
     {% if session %}
         <h1 class="text-center">Welcome {{session.userinfo.name}}!</h1>
-        <p><a href="/logout">Logout</a></p>
+        <button type="button" class="btn btn-warning"><a href="/logout">Login</a></button>
         <div><pre>{{pretty}}</pre></div>
     {% else %}
         <h1 class="text-center">Welcome Guest</h1>
@@ -19,6 +19,9 @@
             <button type="button" class="btn btn-warning"><a href="/login">Login</a></button>
         </p>
     {% endif %}
+
+    {% for actor in actors %}
+
     </div>
   </body>
 </html>
