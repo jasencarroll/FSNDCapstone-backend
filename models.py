@@ -20,7 +20,6 @@ def setup_db(app, database_path=database_path):
     db.init_app(app)
     db.create_all()
 
-# Movie Model
 class Movie(db.Model):
     __tablename__ = 'movies'
 
@@ -28,18 +27,6 @@ class Movie(db.Model):
     title = Column(String, nullable=False)
     release_date = Column(Date, nullable=False)
 
-    def __init__(self, title, release_date):
-        self.title = title
-        self.release_date = release_date
-
-    def format(self):
-        return {
-            'id': self.id,
-            'title': self.title,
-            'release_date': self.release_date
-        }
-
-# Actor Model
 class Actor(db.Model):
     __tablename__ = 'actors'
 
@@ -47,16 +34,3 @@ class Actor(db.Model):
     name = Column(String, nullable=False)
     age = Column(Integer, nullable=False)
     gender = Column(String, nullable=False)
-
-    def __init__(self, name, age, gender):
-        self.name = name
-        self.age = age
-        self.gender = gender
-
-    def format(self):
-        return {
-            'id': self.id,
-            'name': self.name,
-            'age': self.age,
-            'gender': self.gender
-        }
