@@ -15,18 +15,57 @@ This README provides detailed reasoning behind the tests we have written, as wel
 
 ## **Table of Contents**
 
-1. [Test Strategy Overview](#test-strategy-overview)
-2. [Test Categories](#test-categories)
+1. [Installation](#installation)
+2. [Test Strategy Overview](#test-strategy-overview)
+3. [Test Categories](#test-categories)
     - [1. Success Tests for Endpoints](#1-success-tests-for-endpoints)
     - [2. Error Tests for Endpoints](#2-error-tests-for-endpoints)
     - [3. RBAC (Role-Based Access Control) Tests](#3-rbac-tests)
-3. [Local Setup for the Flask App](#local-setup-for-the-flask-app)
+4. [Local Setup for the Flask App](#local-setup-for-the-flask-app)
     - [File Structure](#file-structure)
     - [Installation](#installation)
     - [Running the App Locally](#running-the-app-locally)
-4. [Modules Explanation](#modules-explanation)
+5. [Modules Explanation](#modules-explanation)
 
 ---
+
+## Installation
+
+Requirements:
+- Postgres
+- .env file
+- pip
+
+### Postgres
+
+### .env file
+
+Store the following variables in the `.env` file. 
+
+```
+FLASK_APP=app.py
+FLASK_DEBUG=1
+DATABASE_URL='postgresql://postgres:admin@localhost:5432/casting'
+AUTH0_DOMAIN = 'dev-8his2amisscpohz8.us.auth0.com'
+AUDIENCE = 'https://jcsFSNDCapstone510699.com'
+ASSISTANT_TOKEN = ''
+CASTING_DIRECTOR_TOKEN = ''
+EXECUTIVE_PRODUCER_TOKEN = ''
+APP_SECRET_KEY = ''
+AUTH0_CLIENT_SECRET = ''
+AUTH0_CLIENT_ID = ''
+```
+
+### pip
+
+```
+pip install -r requirements.txt
+```
+
+### Running locally
+```
+flask run
+```
 
 ## **Test Strategy Overview**
 
