@@ -27,10 +27,29 @@ class Movie(db.Model):
     title = Column(String, nullable=False)
     release_date = Column(Date, nullable=False)
 
+    def format(self):
+        """Method to format the movie data."""
+        return {
+            'id': self.id,
+            'title': self.title,
+            'release_date': self.release_date.strftime('%Y-%m-%d')  # Format date to 'YYYY-MM-DD'
+        }
+
+
 class Actor(db.Model):
     __tablename__ = 'actors'
 
-    id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
-    age = Column(Integer, nullable=False)
-    gender = Column(String, nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), nullable=False)
+    age = db.Column(db.Integer, nullable=False)
+    gender = db.Column(db.String(10), nullable=False)
+
+    def format(self):
+        """Method to format the actor data."""
+        return {
+            'id': self.id,
+            'name': self.name,
+            'age': self.age,
+            'gender': self.gender
+        }
+

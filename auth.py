@@ -99,7 +99,7 @@ def verify_decode_jwt(token):
             )
 
             # Print the payload for debugging
-            print("Decoded JWT Payload:", payload)
+            # print("Decoded JWT Payload:", payload)
 
             return payload
 
@@ -136,7 +136,7 @@ def requires_auth(permission=''):
         @wraps(f)
         def wrapper(*args, **kwargs):
             token = get_token_auth_header()
-            print(f"Token: {token}")  # Log the token for debugging
+            #print(f"Token: {token}")  # Log the token for debugging
 
             payload = verify_decode_jwt(token)
             print(f"Decoded JWT payload: {payload}")  # Log the decoded payload
