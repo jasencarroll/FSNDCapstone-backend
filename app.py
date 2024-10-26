@@ -70,7 +70,7 @@ def create_app(test_config=None):
     def callback():
         token = oauth.auth0.authorize_access_token()
         session["user"] = token
-        return redirect("/")
+        return redirect("/actors")
     
     @app.route("/logout")
     def logout():
