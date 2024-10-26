@@ -108,6 +108,26 @@ def create_app(test_config=None):
             'success': True,
             'actors': formatted_actors
         }), 200
+        
+    @app.route('/movies/<int:id>', methods=['GET'])
+    @requires_auth('get:movies')  # Assuming your decorator requires this permission
+    def get_movie(payload, id):  # Make sure 'payload' is accepted as the first argument
+        # Query the movie by its ID
+        movie = Movie.query.get(id)
+
+        # If the movie doesn't exist, return 404
+        if not movie:
+            return jsonify({
+                "success": False,
+                "error": "Movie not found"
+            }), 404
+
+        # If the movie exists, format the movie and return it
+        return jsonify({
+            "success": True,
+            "movie": movie.format()  # Assuming your Movie model has a `format` method
+        }), 200
+
 
     # POST /movies
     @app.route('/movies', methods=['POST'])
