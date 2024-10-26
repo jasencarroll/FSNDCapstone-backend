@@ -35,8 +35,15 @@ Requirements:
 - Postgres
 - .env file
 - pip
+- flask db
 
 ### Postgres
+
+If you have a user database and permissions to create other databases run `psql` if not run `sudo -u postgres psql` and enter the following:
+
+```
+CREATE DATABASE casting;
+```
 
 ### .env file
 
@@ -61,6 +68,8 @@ AUTH0_CLIENT_ID = ''
 ```
 pip install -r requirements.txt
 ```
+
+### flask db
 
 ### Running locally
 ```
