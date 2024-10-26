@@ -144,7 +144,7 @@ def create_app(test_config=None):
         # If the movie exists, format the movie and return it
         return jsonify({
             "success": True,
-            "movie": actor.format()  # Assuming your Movie model has a `format` method
+            "actor": actor.format()  # Assuming your Movie model has a `format` method
         }), 200
 
 
