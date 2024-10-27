@@ -1,5 +1,42 @@
 import psycopg2
 from psycopg2 import sql
+import os
+from urllib.parse import urlparse
+
+# Get the DATABASE_URL from the environment variable
+DATABASE_URL = os.environ.get('DATABASE_URL')
+
+# Parse the URL to extract connection components
+result = urlparse(DATABASE_URL)
+username = result.username
+password = result.password
+database = result.path[1:]  # Remove the leading '/'
+hostname = result.hostname
+port = result.port
+
+# Connect to the database
+try:
+    connection = psycopg2.connect(
+        dbname=database,
+        user=username,
+        password=password,
+        host=hostname,
+        port=port
+    )
+
+    cursor = connection.cursor()
+
+    # Test query
+    cursor.execute("SELECT version();")
+    db_version = cursor.fetchone()
+    print(f"Connected to database: {db_version[0]}")
+
+    # Don't forget to close the connection
+    cursor.close()
+    connection.close()
+
+except Exception as e:
+    print(f"Unable to connect to the database: {e}")
 
 # Actors data
 actors_data = [
