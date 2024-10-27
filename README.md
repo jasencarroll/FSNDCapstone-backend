@@ -2,6 +2,8 @@
 
 ### **README for Testing Framework and Setup**
 
+This project is live at [https://fsndcapstone-backend-66c5827e55b3.herokuapp.com/](https://fsndcapstone-backend-66c5827e55b3.herokuapp.com/)
+
 ## **Overview**
 
 This project involves building a backend API for a casting agency to manage movies and actors, with role-based access control (RBAC) implemented through Auth0. We have written comprehensive unit tests to ensure that the functionality of the app is robust and secure.
