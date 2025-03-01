@@ -24,7 +24,7 @@ migrate = Migrate()
 def create_app(test_config=None):
     app = Flask(__name__)
     setup_db(app)
-    CORS(app)
+    CORS(app, resources={r"/*": {"origins": "https://fsnd.jasenc.dev"}})
     migrate.init_app(app, db)
     
     app.secret_key = env.get("APP_SECRET_KEY")
