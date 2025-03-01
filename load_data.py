@@ -93,9 +93,7 @@ def load_movies(cursor):
 def main():
     try:
         # Connect to PostgreSQL
-        conn = psycopg2.connect(
-            'postgres://ue43atj86hka51:pe732cda53eb7d3ee1d7cee7ba2973d92237b66a0045f7c721f6bbc31b7f7db33@c1i13pt05ja4ag.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/d3hpjprn5alqim'
-        )
+        conn = psycopg2.connect(DATABASE_URL)
         conn.autocommit = True
         cursor = conn.cursor()
         

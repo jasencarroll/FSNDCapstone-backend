@@ -8,8 +8,8 @@ load_dotenv()
 
 # Database setup
 database_path = os.environ.get('DATABASE_URL')
-if database_path.startswith("postgres://"):
-    database_path = database_path.replace("postgres://", "postgresql://", 1)
+if not database_path:
+    raise ValueError("DATABASE_URL environment variable is not set.")
 
 db = SQLAlchemy()
 
